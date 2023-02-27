@@ -221,7 +221,7 @@ def calculate_hand_len(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    assert isinstance(hand, dict)
+    assert isinstance(hand, dict), 'hand is not dict'
     return sum(hand.values())
 
 # print(calculate_hand_len({'d':1, 'a':1, 'z':1, 'l':1, 'e':1}))
