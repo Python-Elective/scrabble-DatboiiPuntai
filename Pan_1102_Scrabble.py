@@ -170,7 +170,6 @@ def update_hand(hand, word):
         if new_hand[c] <= 0:
             del new_hand[c]
 
-    assert isinstance(new_hand, dict), 'new_hand is not dict'
     return new_hand
 
 
