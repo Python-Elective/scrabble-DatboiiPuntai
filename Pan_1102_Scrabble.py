@@ -162,7 +162,6 @@ def update_hand(hand, word):
     """
     assert isinstance(word, str), 'word is not str'
     assert isinstance(hand, dict), 'hand is not dict'
-    assert len(word) <= sum(hand.values()), 'word is longer than hand'
 
     new_hand = hand.copy()
     for c in set(word):
