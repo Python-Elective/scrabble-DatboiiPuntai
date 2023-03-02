@@ -164,13 +164,11 @@ def update_hand(hand, word):
     assert isinstance(hand, dict), 'hand is not dict'
     assert len(word) <= sum(hand.values()), 'word is longer than hand'
 
-    word_counts = {c: word.count(c) for c in set(word)}
-
     new_hand = hand.copy()
-    for k in word_counts.keys():
-        new_hand[k] -= word_counts[k]
-        if new_hand[k] <= 0:
-            del new_hand[k]
+    for c in set(word):
+        new_hand[c] -= word.count(c)
+        if new_hand[c] <= 0:
+            del new_hand[c]
 
     assert isinstance(new_hand, dict), 'new_hand is not dict'
     return new_hand
@@ -198,11 +196,13 @@ def is_valid_word(word, hand, word_list):
     assert isinstance(hand, dict), 'hand is not dict'
     assert isinstance(word_list, list), 'word_list is not list' 
 
-    
+    # check if word is made of letters present in hand
     if not set(word).issubset(set(hand.keys())):
         return False
-    if not all([hand[c] >= word.count(c) for c in word]):
+    # check if hand has enough letters
+    if not all([hand[c] >= word.count(c) for c in set(word)]):
         return False
+    # check if word is in the dictionary
     if not word in word_list:
         return False
     return True
