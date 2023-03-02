@@ -196,15 +196,14 @@ def is_valid_word(word, hand, word_list):
     """
     assert isinstance(word, str), 'word is not str'
     assert isinstance(hand, dict), 'hand is not dict'
-    assert isinstance(word_list, list), 'word_list is not list'
+    assert isinstance(word_list, list), 'word_list is not list' 
 
-    if not word in word_list:
-        return False
+    
     if not set(word).issubset(set(hand.keys())):
         return False
-    word_counts = {c: word.count(c) for c in set(word)}
-
-    if not all([hand[k] >= word_counts[k] for k in word_counts.keys()]):
+    if not all([hand[c] >= word.count(c) for c in word]):
+        return False
+    if not word in word_list:
         return False
     return True
 
