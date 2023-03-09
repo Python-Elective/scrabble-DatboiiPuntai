@@ -71,7 +71,9 @@ def get_word_score(word, n):
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     returns: int >= 0
     """
-    if not word: return 0
+    # check empty string
+    if not word:
+        return 0
 
     assert isinstance(word, str), 'word is not a str'
     assert word.islower(), 'word is not lowercase alphabet'
@@ -79,7 +81,8 @@ def get_word_score(word, n):
     assert n > 0, 'hand size must not be 0'
 
     score = len(word) * sum([SCRABBLE_LETTER_VALUES[x] for x in word])
-    if len(word) == n: score += 50
+    if len(word) == n:
+        score += 50
 
     assert isinstance(score, int), 'score is not an int'
     assert score >= 0, 'score is not >= 0'
@@ -165,6 +168,7 @@ def update_hand(hand, word):
 
     new_hand = hand.copy()
     for c in set(word):
+        # reduce count of each letter in hand by the number of that letter in the word.
         new_hand[c] -= word.count(c)
         if new_hand[c] <= 0:
             del new_hand[c]
@@ -192,7 +196,7 @@ def is_valid_word(word, hand, word_list):
     """
     assert isinstance(word, str), 'word is not str'
     assert isinstance(hand, dict), 'hand is not dict'
-    assert isinstance(word_list, list), 'word_list is not list' 
+    assert isinstance(word_list, list), 'word_list is not list'
 
     # check if word is made of letters present in hand
     if not set(word).issubset(set(hand.keys())):
@@ -210,6 +214,7 @@ def is_valid_word(word, hand, word_list):
 #
 # Problem #4: Playing a hand
 #
+
 
 def calculate_hand_len(hand):
     """ 
@@ -275,7 +280,7 @@ def play_hand(hand, word_list, n):
         # Otherwise (the word is valid):
         # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
         word_score = get_word_score(word, calculate_hand_len(hand))
-        score += get_word_score(word, calculate_hand_len(hand))
+        score += word_score
         print(f'"{word}" earned {word_score} points. Total: {score} points.')
         print()
 
@@ -304,12 +309,14 @@ def play_game(word_list):
     """
     hand = dict()
     while True:
-        menu_input = input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+        menu_input = input(
+            'Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
         if menu_input not in ['n', 'r', 'e']:
             print('Invalid input')
             continue
 
-        if menu_input == 'e': break
+        if menu_input == 'e':
+            break
         elif menu_input == 'n':
             hand = deal_hand(HAND_SIZE)
             play_hand(hand, word_list, HAND_SIZE)
@@ -318,9 +325,6 @@ def play_game(word_list):
                 print('You have not played a hand yet')
                 continue
             play_hand(hand, word_list, HAND_SIZE)
-
-
-        
 
 
 #
