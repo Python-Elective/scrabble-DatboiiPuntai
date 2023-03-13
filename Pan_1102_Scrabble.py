@@ -226,7 +226,8 @@ def calculate_hand_len(hand):
     assert isinstance(hand, dict), 'hand is not dict'
     return sum(hand.values())
 
-# print(calculate_hand_len({'d':1, 'a':1, 'z':1, 'l':1, 'e':1}))
+# print(calculate_hand_len({'d':1, 'a':1, 'z':2, 'l':1, 'e':1}))
+# # Ans: 6
 
 
 def play_hand(hand, word_list, n):
@@ -307,6 +308,8 @@ def play_game(word_list):
 
     2) When done playing the hand, repeat from step 1    
     """
+    assert isinstance(word_list, list), 'word_list is not list'
+
     hand = dict()
     while True:
         menu_input = input(
