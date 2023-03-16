@@ -268,16 +268,13 @@ def play_hand(hand, word_list, n):
         if word == '.':
             # End the game (break out of the loop)
             break
-
-        # Otherwise (the input is not a single period):
-
+        # Otherwise (the input is not a single period)
         # If the word is not valid:
         if not is_valid_word(word, hand, word_list):
             # Reject invalid word (print a message followed by a blank line)
             print('Invalid word, please try again.')
             print()
             continue
-
         # Otherwise (the word is valid):
         # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
         word_score = get_word_score(word, calculate_hand_len(hand))
